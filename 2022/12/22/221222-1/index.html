@@ -20,28 +20,37 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":300,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Record of life and practice">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="本文主要讨论内存角度对C++智能指针unique_ptr的观察 Memory usage of unique_ptrunique_ptr的内存模型如下 由此不难理解,一般的unique_ptr和正常指针的空间占用相同,而当unique_ptr包含自己的delete,其需要在堆上开辟自己的内存空间 一个简单的例子 12345678910111213141516#include &lt;iostrea">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++内存分配-unqiue_ptr">
+<meta property="og:url" content="http://example.com/2022/12/22/221222-1/index.html">
 <meta property="og:site_name" content="Record of life and practice">
+<meta property="og:description" content="本文主要讨论内存角度对C++智能指针unique_ptr的观察 Memory usage of unique_ptrunique_ptr的内存模型如下 由此不难理解,一般的unique_ptr和正常指针的空间占用相同,而当unique_ptr包含自己的delete,其需要在堆上开辟自己的内存空间 一个简单的例子 12345678910111213141516#include &lt;iostrea">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/imgs/22-12-24-0.png">
+<meta property="article:published_time" content="2022-12-21T17:16:32.334Z">
+<meta property="article:modified_time" content="2022-12-24T09:24:48.476Z">
 <meta property="article:author" content="haizhou.fang">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="Memory">
+<meta property="article:tag" content="Smart_pointer">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/imgs/22-12-24-0.png">
 
-<link rel="canonical" href="http://example.com/">
+<link rel="canonical" href="http://example.com/2022/12/22/221222-1/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>Record of life and practice</title>
+  <title>C++内存分配-unqiue_ptr | Record of life and practice</title>
   
 
 
@@ -157,124 +166,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/24/221222-2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="haizhou.fang">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Record of life and practice">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/12/24/221222-2/" class="post-title-link" itemprop="url">C++编译优化-EBO</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2022-12-24 17:05:15 / 修改时间：22:36:53" itemprop="dateCreated datePublished" datetime="2022-12-24T17:05:15+08:00">2022-12-24</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tech/" itemprop="url" rel="index"><span itemprop="name">Tech</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>549</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
 
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Empty-Base-Class-Optimisation-EBO"><a href="#Empty-Base-Class-Optimisation-EBO" class="headerlink" title="Empty Base Class Optimisation (EBO)"></a>Empty Base Class Optimisation (EBO)</h1><p><code>EBO</code> 的方法是, 通过继承空基类来避免对象大小的增加</p>
-<p>在C++中,一个empty object至少也要占一个字节, 但如果这个对象是以基类部分的形式存在,则不会占用额外的空间</p>
-<p>具体的,如果<code>class A</code>为空,则 <code>class B : A</code> 不会增加大小</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A1</span>&#123;&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A2</span>&#123;</span><br><span class="line">    <span class="type">int</span> x;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B1</span> : A1&#123;&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B2</span> : A2&#123;&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">    std::cout &lt;&lt; <span class="built_in">sizeof</span>(B1) &lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt; <span class="built_in">sizeof</span>(B2) &lt;&lt; std::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//1 4</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="How-unique-ptr-apply-EBO"><a href="#How-unique-ptr-apply-EBO" class="headerlink" title="How unique_ptr apply EBO"></a>How unique_ptr apply EBO</h1><p>一个<code>EBO</code>使用可见于无状态的<code>lambda deleter</code>在<code>unique_ptr</code> 上的应用</p>
-<ul>
-<li><a href="/2022/12/22/221222-1/" title="C++内存分配-unqiue_ptr">&#96;C++内存分配-unqiue_ptr</a></li>
-</ul>
-<p>具体的,参考g++ libc++观察对<code>__uniq_ptr_data</code>的实现</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> _Tp, <span class="keyword">typename</span> _Dp = default_delete&lt;_Tp&gt;&gt;</span><br><span class="line"><span class="keyword">class</span> unique_ptr&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    <span class="keyword">using</span> deleter_type  = _Dp;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    tuple&lt;pointer, _Dp&gt; _M_t;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>其中<code>_M_t</code>就是存放指针和<code>deleter</code>的位置, 做一个小的尝试</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">B1* b_ptr;</span><br><span class="line"><span class="function">std::tuple&lt;<span class="title">decltype</span><span class="params">(b_ptr)</span>,A1&gt; <span class="title">s</span><span class="params">(b_ptr,A1())</span></span>;</span><br><span class="line">std::cout &lt;&lt; <span class="built_in">sizeof</span>(s) &lt;&lt; std::endl;</span><br><span class="line"><span class="comment">//8, only b_ptr</span></span><br></pre></td></tr></table></figure>
-<p>发现在tuple中,如果元素为空类,其大小会被优化, 由此引发两个问题</p>
-<ul>
-<li>[1]tuple如何确定A1是一个空类</li>
-<li>[2]tuple如何存储这个空类</li>
-</ul>
-<p>可以在tuple的源码中找到</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Using EBO for elements that are tuples causes ambiguous base errors.</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> _El0, <span class="keyword">typename</span>... _El&gt;</span><br><span class="line">  <span class="keyword">struct</span> <span class="title class_">__is_empty_non_tuple</span>&lt;tuple&lt;_El0, _El...&gt;&gt; : false_type &#123; &#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Use the Empty Base-class Optimization for empty, non-final types.</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> _Tp&gt;</span><br><span class="line">  <span class="keyword">using</span> __empty_not_final</span><br><span class="line">  = <span class="keyword">typename</span> conditional&lt;__is_final(_Tp), false_type,</span><br><span class="line">	   __is_empty_non_tuple&lt;_Tp&gt;&gt;::type;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="type">size_t</span> _Idx, <span class="keyword">typename</span> _Head,</span><br><span class="line">  <span class="type">bool</span> = __empty_not_final&lt;_Head&gt;::value&gt;</span><br><span class="line">  <span class="keyword">struct</span> _Head_base;</span><br></pre></td></tr></table></figure>
-<pre><code>std::cout &lt;&lt; std::is_empty_v&lt;decltype(lam1)&gt; &lt;&lt; std::endl;
-std::cout &lt;&lt; std::is_empty_v&lt;decltype(lam2)&gt; &lt;&lt; std::endl;
-</code></pre>
-<p>而其中</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// is_empty</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> _Tp&gt;</span><br><span class="line">  <span class="keyword">struct</span> <span class="title class_">is_empty</span></span><br><span class="line">  : <span class="keyword">public</span> integral_constant&lt;<span class="type">bool</span>, __is_empty(_Tp)&gt;</span><br><span class="line">  &#123; &#125;;</span><br></pre></td></tr></table></figure>
-<p>根据是否是空类,会用不同的判定</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> x = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">auto</span> lam1= [&amp;](<span class="type">int</span> y) &#123;</span><br><span class="line">    x = <span class="number">1</span>;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;lam with state&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;;</span><br><span class="line">std::cout &lt;&lt; <span class="built_in">sizeof</span>(lam1) &lt;&lt; std::endl;</span><br><span class="line"><span class="keyword">auto</span> lam2 = [](<span class="type">int</span> y) &#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;lam without state&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;;</span><br><span class="line">std::cout &lt;&lt; std::is_empty_v&lt;<span class="keyword">decltype</span>(lam1)&gt; &lt;&lt; std::endl;</span><br><span class="line">std::cout &lt;&lt; std::is_empty_v&lt;<span class="keyword">decltype</span>(lam2)&gt; &lt;&lt; std::endl;</span><br><span class="line"><span class="comment">// 0 1</span></span><br></pre></td></tr></table></figure>
-<p>tuple实现的时候,</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="type">size_t</span> _Idx, <span class="keyword">typename</span> _Head, <span class="keyword">typename</span>... _Tail&gt;</span><br><span class="line">  <span class="keyword">struct</span> <span class="title class_">_Tuple_impl</span>&lt;_Idx, _Head, _Tail...&gt;</span><br><span class="line">  : <span class="keyword">public</span> _Tuple_impl&lt;_Idx + <span class="number">1</span>, _Tail...&gt;,</span><br><span class="line">    <span class="keyword">private</span> _Head_base&lt;_Idx, _Head&gt;</span><br></pre></td></tr></table></figure>
-
-<p> <code>public</code> 继承表达的<code>is-a</code>关系，<code>private</code> 继承隐含的意思其实是 <code>is-implemented-in-terms-of</code>，即<code>由…实现出</code><br>这里表示,<code>_Head_base</code>是其中的一部分,我们获得了<code>_Head_base</code>的接口,但这只是一个特化的空类</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;std::<span class="type">size_t</span> _Idx, <span class="keyword">typename</span> _Head, <span class="type">bool</span> = __empty_not_final&lt;_Head&gt;::value&gt;</span><br><span class="line"><span class="keyword">struct</span> _Head_base;</span><br><span class="line"><span class="keyword">template</span>&lt;std::<span class="type">size_t</span> _Idx, <span class="keyword">typename</span> _Head&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">_Head_base</span>&lt;_Idx, _Head, <span class="literal">true</span>&gt; : <span class="keyword">public</span> _Head</span><br><span class="line">&#123; &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -290,10 +185,9 @@ std::cout &lt;&lt; std::is_empty_v&lt;decltype(lam2)&gt; &lt;&lt; std::endl;
       <meta itemprop="name" content="Record of life and practice">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/12/22/221222-1/" class="post-title-link" itemprop="url">C++内存分配-unqiue_ptr</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          C++内存分配-unqiue_ptr
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -346,7 +240,7 @@ std::cout &lt;&lt; std::is_empty_v&lt;decltype(lam2)&gt; &lt;&lt; std::endl;
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>本文主要讨论内存角度对<code>C++</code>智能指针<code>unique_ptr</code>的观察</p>
+        <p>本文主要讨论内存角度对<code>C++</code>智能指针<code>unique_ptr</code>的观察</p>
 <h2 id="Memory-usage-of-unique-ptr"><a href="#Memory-usage-of-unique-ptr" class="headerlink" title="Memory usage of unique_ptr"></a>Memory usage of unique_ptr</h2><p><code>unique_ptr</code>的内存模型如下<br><img src="/../imgs/22-12-24-0.png" alt="avatar"></p>
 <p>由此不难理解,一般的<code>unique_ptr</code>和正常指针的空间占用相同,而当<code>unique_ptr</code>包含自己的<code>delete</code>,其需要在堆上开辟自己的内存空间</p>
 <p>一个简单的例子</p>
@@ -377,21 +271,35 @@ std::cout &lt;&lt; std::is_empty_v&lt;decltype(lam2)&gt; &lt;&lt; std::endl;
 <li><a href="/2022/12/24/221222-2/" title="C++编译优化-EBO">&#96;C++编译优化-EBO&#96;</a></li>
 </ul>
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C++</a>
+              <a href="/tags/Memory/" rel="tag"># Memory</a>
+              <a href="/tags/Smart-pointer/" rel="tag"># Smart_pointer</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2022/12/24/221222-2/" rel="next" title="C++编译优化-EBO">
+      C++编译优化-EBO <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
+    
   </article>
   
   
-  
-
-
   
 
 
@@ -444,6 +352,7 @@ std::cout &lt;&lt; std::is_empty_v&lt;decltype(lam2)&gt; &lt;&lt; std::endl;
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Memory-usage-of-unique-ptr"><span class="nav-number">1.</span> <span class="nav-text">Memory usage of unique_ptr</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

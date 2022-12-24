@@ -20,28 +20,35 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":300,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Record of life and practice">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="Empty Base Class Optimisation (EBO)EBO 的方法是, 通过继承空基类来避免对象大小的增加 在C++中,一个empty object至少也要占一个字节, 但如果这个对象是以基类部分的形式存在,则不会占用额外的空间 具体的,如果class A为空,则 class B : A 不会增加大小 123456789101112class A1&amp;#123;&amp;#125;;cla">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++编译优化-EBO">
+<meta property="og:url" content="http://example.com/2022/12/24/221222-2/index.html">
 <meta property="og:site_name" content="Record of life and practice">
+<meta property="og:description" content="Empty Base Class Optimisation (EBO)EBO 的方法是, 通过继承空基类来避免对象大小的增加 在C++中,一个empty object至少也要占一个字节, 但如果这个对象是以基类部分的形式存在,则不会占用额外的空间 具体的,如果class A为空,则 class B : A 不会增加大小 123456789101112class A1&amp;#123;&amp;#125;;cla">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-12-24T09:05:15.556Z">
+<meta property="article:modified_time" content="2022-12-24T14:36:53.156Z">
 <meta property="article:author" content="haizhou.fang">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="Memory">
+<meta property="article:tag" content="Template">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/">
+<link rel="canonical" href="http://example.com/2022/12/24/221222-2/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>Record of life and practice</title>
+  <title>C++编译优化-EBO | Record of life and practice</title>
   
 
 
@@ -157,9 +164,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -175,10 +183,9 @@
       <meta itemprop="name" content="Record of life and practice">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/12/24/221222-2/" class="post-title-link" itemprop="url">C++编译优化-EBO</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          C++编译优化-EBO
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -225,7 +232,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Empty-Base-Class-Optimisation-EBO"><a href="#Empty-Base-Class-Optimisation-EBO" class="headerlink" title="Empty Base Class Optimisation (EBO)"></a>Empty Base Class Optimisation (EBO)</h1><p><code>EBO</code> 的方法是, 通过继承空基类来避免对象大小的增加</p>
+        <h1 id="Empty-Base-Class-Optimisation-EBO"><a href="#Empty-Base-Class-Optimisation-EBO" class="headerlink" title="Empty Base Class Optimisation (EBO)"></a>Empty Base Class Optimisation (EBO)</h1><p><code>EBO</code> 的方法是, 通过继承空基类来避免对象大小的增加</p>
 <p>在C++中,一个empty object至少也要占一个字节, 但如果这个对象是以基类部分的形式存在,则不会占用额外的空间</p>
 <p>具体的,如果<code>class A</code>为空,则 <code>class B : A</code> 不会增加大小</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">A1</span>&#123;&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A2</span>&#123;</span><br><span class="line">    <span class="type">int</span> x;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B1</span> : A1&#123;&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">B2</span> : A2&#123;&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">    std::cout &lt;&lt; <span class="built_in">sizeof</span>(B1) &lt;&lt;<span class="string">&quot; &quot;</span>&lt;&lt; <span class="built_in">sizeof</span>(B2) &lt;&lt; std::endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//1 4</span></span><br></pre></td></tr></table></figure>
@@ -260,138 +267,35 @@ std::cout &lt;&lt; std::is_empty_v&lt;decltype(lam2)&gt; &lt;&lt; std::endl;
 
 
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C++</a>
+              <a href="/tags/Memory/" rel="tag"># Memory</a>
+              <a href="/tags/Template/" rel="tag"># Template</a>
+          </div>
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/22/221222-1/">
+        
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="haizhou.fang">
-      <meta itemprop="description" content="">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Record of life and practice">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/12/22/221222-1/" class="post-title-link" itemprop="url">C++内存分配-unqiue_ptr</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-12-22 01:16:32" itemprop="dateCreated datePublished" datetime="2022-12-22T01:16:32+08:00">2022-12-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-12-24 17:24:48" itemprop="dateModified" datetime="2022-12-24T17:24:48+08:00">2022-12-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Tech/" itemprop="url" rel="index"><span itemprop="name">Tech</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>628</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>本文主要讨论内存角度对<code>C++</code>智能指针<code>unique_ptr</code>的观察</p>
-<h2 id="Memory-usage-of-unique-ptr"><a href="#Memory-usage-of-unique-ptr" class="headerlink" title="Memory usage of unique_ptr"></a>Memory usage of unique_ptr</h2><p><code>unique_ptr</code>的内存模型如下<br><img src="/../imgs/22-12-24-0.png" alt="avatar"></p>
-<p>由此不难理解,一般的<code>unique_ptr</code>和正常指针的空间占用相同,而当<code>unique_ptr</code>包含自己的<code>delete</code>,其需要在堆上开辟自己的内存空间</p>
-<p>一个简单的例子</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;memory&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Widget</span>&#123;</span><br><span class="line">    <span class="type">int</span> m_x;</span><br><span class="line">    <span class="type">int</span> m_y;</span><br><span class="line">    <span class="type">int</span> m_z;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Widget</span>(<span class="type">int</span> x, <span class="type">int</span> y, <span class="type">int</span> z):</span><br><span class="line">    <span class="built_in">m_x</span>(x),<span class="built_in">m_y</span>(y),<span class="built_in">m_z</span>(z)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/*code here*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在x64下,显然不包含<code>delete</code>的<code>unique_ptr</code>大小是一个普通指针的大小,并没有额外的实现,这和其构造器的实现有关</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    Widget* pw = <span class="keyword">new</span> <span class="built_in">Widget</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>);</span><br><span class="line">    <span class="function">std::unique_ptr&lt;Widget&gt; <span class="title">w1</span><span class="params">(<span class="keyword">new</span> Widget(<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>))</span></span>;</span><br><span class="line">    <span class="keyword">delete</span> pw;</span><br><span class="line">    std::cout &lt;&lt; <span class="built_in">sizeof</span>(w1) &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>当<code>delete</code>是一个函数对象,则去居于函数对象额外数据大小</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">DeleteObject</span>&#123;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">operator</span><span class="params">()</span><span class="params">(Widget* w)</span></span>&#123;</span><br><span class="line">        <span class="keyword">delete</span> w;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;Using DeleteObject&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int64_t</span> padding_size1;</span><br><span class="line">    <span class="type">int64_t</span> padding_size2;</span><br><span class="line">&#125;;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function">std::unique_ptr&lt;Widget,DeleteObject&gt; <span class="title">w2</span><span class="params">(<span class="keyword">new</span> Widget(<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>))</span></span>;</span><br><span class="line">    std::cout &lt;&lt; <span class="built_in">sizeof</span>(w2) &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//24,8 for ptr and 8+8 for padding</span></span><br></pre></td></tr></table></figure>
-<p>使用lldb调试,打印w2</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(lldb) <span class="function">p <span class="title">w2</span></span></span><br><span class="line"><span class="function"><span class="params">(std::unique_ptr&lt;Widget, DeleteObject&gt;)</span> $0 </span>= <span class="number">0x55555556d2e0</span> &#123;</span><br><span class="line">  pointer = <span class="number">0x000055555556d2e0</span></span><br><span class="line">  deleter = (padding_size = <span class="number">0</span>, padding_size2 = <span class="number">0</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>指针地址和是数据地址是连续的,函数在别的位置</p>
-<p>当<code>delete</code>是一个函数指针,去取决于编译器实现,一般的会增大一个指针的大小</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">DeleteFunction</span><span class="params">(Widget* w)</span></span>&#123;</span><br><span class="line">    <span class="keyword">delete</span> w;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;Using DeleteFunction&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line">    <span class="comment">//function delete</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function">std::unique_ptr&lt;Widget,<span class="title">void</span><span class="params">(*)</span><span class="params">(Widget*)</span>&gt; <span class="title">w3</span><span class="params">(<span class="keyword">new</span> Widget(<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>),DeleteFunction)</span></span>;</span><br><span class="line">        std::cout &lt;&lt; <span class="built_in">sizeof</span>(w3) &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//16 function_ptr + unique_ptr</span></span><br></pre></td></tr></table></figure>
-<p>此时函数指针的位置被设置在<code>deleter</code></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(lldb) <span class="function">p <span class="title">w3</span></span></span><br><span class="line"><span class="function"><span class="params">(std::unique_ptr&lt;Widget, <span class="type">void</span> (*)(Widget *)&gt;)</span> $1 </span>= <span class="number">0x55555556d2e0</span> &#123;</span><br><span class="line">  pointer = <span class="number">0x000055555556d2e0</span></span><br><span class="line">  deleter = <span class="number">0x0000555555555220</span> (a.out`<span class="built_in">DeleteFunction</span>(Widget*) at unqiue_test.cpp:<span class="number">23</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>当<code>deleter</code>是一个无状态函数,lamda表达式且不带捕获,则不会占用任何内存</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//lambda delete</span></span><br><span class="line">&#123;</span><br><span class="line">     <span class="keyword">auto</span> lam= [](Widget* w) &#123;</span><br><span class="line">        <span class="keyword">delete</span> w;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;lam delete w&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">     &#125;;</span><br><span class="line">     <span class="function">std::unique_ptr&lt;Widget,<span class="title">decltype</span><span class="params">(lam)</span>&gt; <span class="title">w4</span><span class="params">(<span class="keyword">new</span> Widget(<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>),lam)</span></span>;</span><br><span class="line">     std::cout &lt;&lt; <span class="built_in">sizeof</span>(w4) &lt;&lt; std::endl;</span><br><span class="line">     std::cout &lt;&lt; <span class="built_in">sizeof</span>(lam) &lt;&lt;std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>可以通过lldb观察,确实没有进行额外的储存</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(lldb) <span class="function">p <span class="title">w4</span></span></span><br><span class="line"><span class="function"><span class="params">(std::unique_ptr&lt;Widget, deleter_type&gt;)</span> $3 </span>= <span class="number">0x55555556d2e0</span> &#123;</span><br><span class="line">  pointer = <span class="number">0x000055555556d2e0</span></span><br><span class="line">&#125;</span><br><span class="line">(lldb) p <span class="built_in">lam</span></span><br><span class="line">(deleter_type) $<span class="number">4</span> = &#123;&#125;</span><br></pre></td></tr></table></figure>
-<p>如果使用带捕获的<code>(&amp;)</code> lambda函数,则会获得额外的大小</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">    <span class="comment">//lambda delete with &amp;</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> x = <span class="number">0</span>;</span><br><span class="line">     <span class="keyword">auto</span> lam= [&amp;](Widget* w) &#123;</span><br><span class="line">        <span class="keyword">delete</span> w;</span><br><span class="line">        x = <span class="number">1</span>;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;lam delete w&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">     &#125;;</span><br><span class="line">     <span class="function">std::unique_ptr&lt;Widget,<span class="title">decltype</span><span class="params">(lam)</span>&gt; <span class="title">w5</span><span class="params">(<span class="keyword">new</span> Widget(<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>),lam)</span></span>;</span><br><span class="line">     std::cout &lt;&lt; <span class="built_in">sizeof</span>(w5) &lt;&lt; std::endl;</span><br><span class="line">     std::cout &lt;&lt; <span class="built_in">sizeof</span>(lam) &lt;&lt;std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>具体在内存中则是</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(lldb) <span class="function">p <span class="title">lam</span></span></span><br><span class="line"><span class="function"><span class="params">((unnamed <span class="keyword">class</span>))</span> $0 </span>= &#123;</span><br><span class="line">  x = <span class="number">0x00007fffffffdafc</span></span><br><span class="line">&#125;</span><br><span class="line">(lldb) p <span class="built_in">w5</span></span><br><span class="line">(std::unique_ptr&lt;Widget, (unnamed <span class="keyword">class</span>)&gt;) $<span class="number">1</span> = <span class="number">0x55555556d2e0</span> &#123;</span><br><span class="line">  pointer = <span class="number">0x000055555556d2e0</span></span><br><span class="line">  deleter = &#123;</span><br><span class="line">    x = <span class="number">0x00007fffffffdafc</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>可以看到额外保存了一份状态信息</p>
-<p>那么C++是如何保存和unique_ptr匹配的lambda函数,这涉及到<code>EBO</code></p>
-<ul>
-<li><a href="/2022/12/24/221222-2/" title="C++编译优化-EBO">&#96;C++编译优化-EBO&#96;</a></li>
-</ul>
-
-      
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/12/22/221222-1/" rel="prev" title="C++内存分配-unqiue_ptr">
+      <i class="fa fa-chevron-left"></i> C++内存分配-unqiue_ptr
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
-  
-
-
   
 
 
@@ -444,6 +348,7 @@ std::cout &lt;&lt; std::is_empty_v&lt;decltype(lam2)&gt; &lt;&lt; std::endl;
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Empty-Base-Class-Optimisation-EBO"><span class="nav-number">1.</span> <span class="nav-text">Empty Base Class Optimisation (EBO)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#How-unique-ptr-apply-EBO"><span class="nav-number">2.</span> <span class="nav-text">How unique_ptr apply EBO</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
